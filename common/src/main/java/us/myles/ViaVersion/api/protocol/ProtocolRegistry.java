@@ -202,6 +202,9 @@ public class ProtocolRegistry {
             List<Pair<Integer, Protocol>> paths = getProtocolPath(versions.getVersion(), ProtocolRegistry.SERVER_PROTOCOL);
             if (paths == null) continue;
             supportedVersions.add(versions.getVersion());
+            if(versions.isSnapshot()){
+                supportedVersions.add(versions.getFullSnapshotVersion());
+            }            
             for (Pair<Integer, Protocol> path : paths) {
                 supportedVersions.add(path.getKey());
             }
