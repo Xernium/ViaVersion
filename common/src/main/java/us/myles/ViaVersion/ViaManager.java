@@ -83,7 +83,7 @@ public class ViaManager {
     public void onServerLoaded() {
         // Load Server Protocol
         try {
-            ProtocolRegistry.SERVER_PROTOCOL = ProtocolVersion.getProtocol(injector.getServerProtocolVersion()).getVersion();
+            ProtocolRegistry.SERVER_PROTOCOL = ProtocolVersion.getProtocol(injector.getServerProtocolVersion()).getOriginalVersion();
         } catch (Exception e) {
             platform.getLogger().severe("ViaVersion failed to get the server protocol!");
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class ViaManager {
                 platform.getLogger().warning("If you need support for older versions you may need to use one or more ViaVersion addons too.");
                 platform.getLogger().warning("In that case please read the ViaVersion resource page carefully or use https://jo0001.github.io/ViaSetup");
                 platform.getLogger().warning("and if you're still unsure, feel free to join our Discord-Server for further assistance.");
-            } else if (ProtocolRegistry.SERVER_PROTOCOL <= ProtocolVersion.v1_12_2.getVersion() && !platform.isProxy()) {
+            } else if (ProtocolRegistry.SERVER_PROTOCOL <= ProtocolVersion.v1_12_2.getOriginalVersion() && !platform.isProxy()) {
                 platform.getLogger().warning("This version of Minecraft is extremely outdated and support for it has reached its end of life. "
                         + "You will still be able to run Via on this version, but we are unlikely to provide any further fixes or help with problems specific to legacy versions. "
                         + "Please consider updating to give your players a better experience and to avoid issues that have long been fixed.");
@@ -117,12 +117,12 @@ public class ViaManager {
                 mappingLoadingTask = null;
             }
         }, 10L);
-        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_9.getVersion()) {
+        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_9.getOriginalVersion()) {
             if (Via.getConfig().isSimulatePlayerTick()) {
                 Via.getPlatform().runRepeatingSync(new ViaIdleThread(), 1L);
             }
         }
-        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_13.getVersion()) {
+        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_13.getOriginalVersion()) {
             if (Via.getConfig().get1_13TabCompleteDelay() > 0) {
                 Via.getPlatform().runRepeatingSync(new TabCompleteThread(), 1L);
             }

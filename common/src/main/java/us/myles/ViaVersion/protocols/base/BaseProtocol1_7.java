@@ -65,7 +65,7 @@ public class BaseProtocol1_7 extends SimpleProtocol {
                             }
 
                             if (ProtocolRegistry.SERVER_PROTOCOL == -1) { // Set the Server protocol if the detection on startup failed
-                                ProtocolRegistry.SERVER_PROTOCOL = ProtocolVersion.getProtocol(protocolVersion).getVersion();
+                                ProtocolRegistry.SERVER_PROTOCOL = ProtocolVersion.getProtocol(protocolVersion).getOriginalVersion();
                             }
 
                             // Ensure the server has a version provider

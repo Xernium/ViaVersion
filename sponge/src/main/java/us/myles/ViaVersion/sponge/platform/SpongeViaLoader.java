@@ -50,7 +50,7 @@ public class SpongeViaLoader implements ViaPlatformLoader {
         registerListener(new UpdateListener());
 
         /* 1.9 client to 1.8 server */
-        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_9.getVersion()) {
+        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_9.getOriginalVersion()) {
             try {
                 Class.forName("org.spongepowered.api.event.entity.DisplaceEntityEvent");
                 storeListener(new Sponge4ArmorListener()).register();
@@ -67,7 +67,7 @@ public class SpongeViaLoader implements ViaPlatformLoader {
         }
 
         /* Providers */
-        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_9.getVersion()) {
+        if (ProtocolRegistry.SERVER_PROTOCOL < ProtocolVersion.v1_9.getOriginalVersion()) {
             Via.getManager().getProviders().use(BulkChunkTranslatorProvider.class, new SpongeViaBulkChunkTranslator());
             Via.getManager().getProviders().use(MovementTransmitterProvider.class, new SpongeViaMovementTransmitter());
 

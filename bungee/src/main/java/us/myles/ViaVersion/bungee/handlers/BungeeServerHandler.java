@@ -139,7 +139,7 @@ public class BungeeServerHandler implements Listener {
 
                     int protocolId = ProtocolDetectorService.getProtocolId(serverName);
 
-                    if (protocolId <= ProtocolVersion.v1_8.getVersion()) { // 1.8 doesn't have BossBar packet
+                    if (protocolId <= ProtocolVersion.v1_8.getOriginalVersion()) { // 1.8 doesn't have BossBar packet
                         if (storage.getBossbar() != null) {
                             // TODO: Verify whether this packet needs to be sent when 1.8 -> 1.9 protocol isn't present in the pipeline
                             // This ensures we can encode it properly as only the 1.9 protocol is currently implemented.
@@ -181,7 +181,7 @@ public class BungeeServerHandler implements Listener {
                     for (Object message : (List) relayMessages) {
                         PluginMessage plMsg = (PluginMessage) message;
                         String channel = plMsg.getTag();
-                        int id1_13 = ProtocolVersion.v1_13.getVersion();
+                        int id1_13 = ProtocolVersion.v1_13.getOriginalVersion();
                         if (previousServerProtocol != -1) {
                             String oldChannel = channel;
                             if (previousServerProtocol < id1_13 && protocolId >= id1_13) {

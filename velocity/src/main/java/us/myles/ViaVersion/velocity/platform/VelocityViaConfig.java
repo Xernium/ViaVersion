@@ -46,7 +46,7 @@ public class VelocityViaConfig extends AbstractViaConfig {
                 if (entry.getValue() instanceof String) {
                     ProtocolVersion found = ProtocolVersion.getClosest((String) entry.getValue());
                     if (found != null) {
-                        servers.put(entry.getKey(), found.getVersion());
+                        servers.put(entry.getKey(), found.getOriginalVersion());
                     } else {
                         servers.remove(entry.getKey()); // Remove!
                     }

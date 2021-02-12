@@ -82,15 +82,15 @@ public class ProtocolRegistry {
 
         // Base Protocol
         registerBaseProtocol(BASE_PROTOCOL, Range.lessThan(Integer.MIN_VALUE));
-        registerBaseProtocol(new BaseProtocol1_7(), Range.lessThan(ProtocolVersion.v1_16.getVersion()));
-        registerBaseProtocol(new BaseProtocol1_16(), Range.atLeast(ProtocolVersion.v1_16.getVersion()));
+        registerBaseProtocol(new BaseProtocol1_7(), Range.lessThan(ProtocolVersion.v1_16.getOriginalVersion()));
+        registerBaseProtocol(new BaseProtocol1_16(), Range.atLeast(ProtocolVersion.v1_16.getOriginalVersion()));
 
         registerProtocol(new Protocol1_9To1_8(), ProtocolVersion.v1_9, ProtocolVersion.v1_8);
-        registerProtocol(new Protocol1_9_1To1_9(), Arrays.asList(ProtocolVersion.v1_9_1.getVersion(), ProtocolVersion.v1_9_2.getVersion()), ProtocolVersion.v1_9.getVersion());
+        registerProtocol(new Protocol1_9_1To1_9(), Arrays.asList(ProtocolVersion.v1_9_1.getOriginalVersion(), ProtocolVersion.v1_9_2.getOriginalVersion()), ProtocolVersion.v1_9.getOriginalVersion());
         registerProtocol(new Protocol1_9_3To1_9_1_2(), ProtocolVersion.v1_9_3, ProtocolVersion.v1_9_2);
 
         registerProtocol(new Protocol1_9To1_9_1(), ProtocolVersion.v1_9, ProtocolVersion.v1_9_2);
-        registerProtocol(new Protocol1_9_1_2To1_9_3_4(), Arrays.asList(ProtocolVersion.v1_9_1.getVersion(), ProtocolVersion.v1_9_2.getVersion()), ProtocolVersion.v1_9_3.getVersion());
+        registerProtocol(new Protocol1_9_1_2To1_9_3_4(), Arrays.asList(ProtocolVersion.v1_9_1.getOriginalVersion(), ProtocolVersion.v1_9_2.getOriginalVersion()), ProtocolVersion.v1_9_3.getOriginalVersion());
         registerProtocol(new Protocol1_10To1_9_3_4(), ProtocolVersion.v1_10, ProtocolVersion.v1_9_3);
 
         registerProtocol(new Protocol1_11To1_10(), ProtocolVersion.v1_11, ProtocolVersion.v1_10);
@@ -135,7 +135,7 @@ public class ProtocolRegistry {
      * @param output    The output server version it converts to.
      */
     public static void registerProtocol(Protocol protocol, ProtocolVersion supported, ProtocolVersion output) {
-        registerProtocol(protocol, Collections.singletonList(supported.getVersion()), output.getVersion());
+        registerProtocol(protocol, Collections.singletonList(supported.getOriginalVersion()), output.getOriginalVersion());
     }
 
     /**
@@ -199,9 +199,9 @@ public class ProtocolRegistry {
 
         supportedVersions.add(ProtocolRegistry.SERVER_PROTOCOL);
         for (ProtocolVersion versions : ProtocolVersion.getProtocols()) {
-            List<Pair<Integer, Protocol>> paths = getProtocolPath(versions.getVersion(), ProtocolRegistry.SERVER_PROTOCOL);
+            List<Pair<Integer, Protocol>> paths = getProtocolPath(versions.getOriginalVersion(), ProtocolRegistry.SERVER_PROTOCOL);
             if (paths == null) continue;
-            supportedVersions.add(versions.getVersion());
+            supportedVersions.add(versions.getOriginalVersion());
             for (Pair<Integer, Protocol> path : paths) {
                 supportedVersions.add(path.getKey());
             }

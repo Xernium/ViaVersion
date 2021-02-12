@@ -66,7 +66,7 @@ public class VelocityViaInjector implements ViaInjector {
         try {
             if (getPlayerInfoForwardingMode != null
                     && ((Enum<?>) getPlayerInfoForwardingMode.invoke(VelocityPlugin.PROXY.getConfiguration()))
-                    .name().equals("MODERN")) return ProtocolVersion.v1_13.getVersion();
+                    .name().equals("MODERN")) return ProtocolVersion.v1_13.getOriginalVersion();
         } catch (IllegalAccessException | InvocationTargetException ignored) {
         }
         return com.velocitypowered.api.network.ProtocolVersion.MINIMUM_VERSION.getProtocol();
