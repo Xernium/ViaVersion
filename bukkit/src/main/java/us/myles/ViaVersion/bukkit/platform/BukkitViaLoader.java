@@ -88,7 +88,7 @@ public class BukkitViaLoader implements ViaPlatformLoader {
         int serverProtocolVersion = Via.getAPI().getServerVersion().lowestSupportedVersion();
 
         /* 1.9 client to 1.8 server */
-        if (serverProtocolVersion < ProtocolVersion.v1_9.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_9.getOriginalVersion()) {
             storeListener(new ArmorListener(plugin)).register();
             storeListener(new DeathListener(plugin)).register();
             storeListener(new BlockListener(plugin)).register();
@@ -99,8 +99,8 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             }
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_14.getVersion()) {
-            boolean use1_9Fix = plugin.getConf().is1_9HitboxFix() && serverProtocolVersion < ProtocolVersion.v1_9.getVersion();
+        if (serverProtocolVersion < ProtocolVersion.v1_14.getOriginalVersion()) {
+            boolean use1_9Fix = plugin.getConf().is1_9HitboxFix() && serverProtocolVersion < ProtocolVersion.v1_9.getOriginalVersion();
             if (use1_9Fix || plugin.getConf().is1_14HitboxFix()) {
                 try {
                     storeListener(new PlayerSneakListener(plugin, use1_9Fix, plugin.getConf().is1_14HitboxFix())).register();
@@ -111,7 +111,7 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             }
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_15.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_15.getOriginalVersion()) {
             try {
                 Class.forName("org.bukkit.event.entity.EntityToggleGlideEvent");
                 storeListener(new EntityToggleGlideListener(plugin)).register();
@@ -122,13 +122,13 @@ public class BukkitViaLoader implements ViaPlatformLoader {
         if ((Bukkit.getVersion().toLowerCase(Locale.ROOT).contains("paper")
                 || Bukkit.getVersion().toLowerCase(Locale.ROOT).contains("taco")
                 || Bukkit.getVersion().toLowerCase(Locale.ROOT).contains("torch"))
-                && serverProtocolVersion < ProtocolVersion.v1_12.getVersion()) {
+                && serverProtocolVersion < ProtocolVersion.v1_12.getOriginalVersion()) {
             plugin.getLogger().info("Enabling Paper/TacoSpigot/Torch patch: Fixes block placement.");
             storeListener(new PaperPatch(plugin)).register();
         }
 
         /* Providers */
-        if (serverProtocolVersion < ProtocolVersion.v1_9.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_9.getOriginalVersion()) {
             Via.getManager().getProviders().use(BulkChunkTranslatorProvider.class, new BukkitViaBulkChunkTranslator());
             Via.getManager().getProviders().use(MovementTransmitterProvider.class, new BukkitViaMovementTransmitter());
 
@@ -157,12 +157,12 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             });
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_12.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_12.getOriginalVersion()) {
             if (plugin.getConf().is1_12QuickMoveActionFix()) {
                 Via.getManager().getProviders().use(InventoryQuickMoveProvider.class, new BukkitInventoryQuickMoveProvider());
             }
         }
-        if (serverProtocolVersion < ProtocolVersion.v1_13.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_13.getOriginalVersion()) {
             if (Via.getConfig().getBlockConnectionMethod().equalsIgnoreCase("world")) {
                 BukkitBlockConnectionProvider blockConnectionProvider = new BukkitBlockConnectionProvider();
                 Via.getManager().getProviders().use(BlockConnectionProvider.class, blockConnectionProvider);

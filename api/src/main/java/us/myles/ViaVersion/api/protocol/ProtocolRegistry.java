@@ -52,7 +52,7 @@ public class ProtocolRegistry {
      * @param output    The output server version it converts to.
      */
     public static void registerProtocol(Protocol protocol, ProtocolVersion supported, ProtocolVersion output) {
-        registerProtocol(protocol, Collections.singletonList(supported.getVersion()), output.getVersion());
+        registerProtocol(protocol, Collections.singletonList(supported.getOriginalVersion()), output.getOriginalVersion());
     }
 
     /**
